@@ -1,38 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useEffect, useState } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { setToken } from "../redux/action";
 
 export default function Users() {
-    const Token = useSelector((state)=>state?.auth?.token)
-    const userList = useSelector((state) => state?.auth?.userList)
-    const [Header, setHeader] = useState([])
+  const Token = useSelector((state) => state?.auth?.token);
+  const userList = useSelector((state) => state?.auth?.userList);
+  const [Header, setHeader] = useState([]);
     const navigate = useNavigate();
+  const dispatch = useDispatch();
     let timer;
     
-    
-    useEffect(()=>{
+  useEffect(() => {
+    if (!Token) navigate("/login");
       Object.values(events).forEach((item) => {
         window.addEventListener(item, () => {
           resetTimer();
           logoutTimer();
         });
       });
-    },[])
+  }, []);
 
-    useEffect(()=>{
-        if(userList?.length)
-            setHeader(Object.keys(userList[0]).map((key)=>{return key}))    
-    },[userList])
-
+  useEffect(() => {
+    if (userList?.length)
+      setHeader(
+        Object.keys(userList[0]).map((key) => {
+          return key;
+        })
+      );
+  }, [userList]);
 
     const events = [
       "load",
@@ -42,8 +46,6 @@ export default function Users() {
       "scroll",
       "keypress",
     ];
-    
-    
     
     const logoutTimer = () => {
       timer = setTimeout(() => {
@@ -60,8 +62,9 @@ export default function Users() {
     };
     
     const logout = () => {
+    dispatch(setToken(""))
       localStorage.clear();
-      navigate("/login")
+    navigate("/login");
     };
           
   return (
@@ -69,8 +72,12 @@ export default function Users() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            {Header?.map((cellName,index)=>{
-                return(<TableCell align='right' key={index}>{cellName}</TableCell>)
+            {Header?.map((cellName, index) => {
+              return (
+                <TableCell align="right" key={index}>
+                  {cellName}
+                </TableCell>
+              );
             })}
           </TableRow>
         </TableHead>
@@ -78,12 +85,9 @@ export default function Users() {
           {userList?.map((user) => (
             <TableRow
               key={user.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              style={{'backgroundColor': user.color}}
-            >
-              <TableCell align='right'>
-                {user.id}
-              </TableCell>
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              style={{ backgroundColor: user.color }}>
+              <TableCell align="right">{user.id}</TableCell>
               <TableCell align="right">{user.name}</TableCell>
               <TableCell align="right">{user.year}</TableCell>
               <TableCell align="right">{user.color}</TableCell>

@@ -7,11 +7,7 @@ import Users from "../components/User";
 
 const IRoutes = () => {
   const state = useSelector((state) => state.auth);
-  const timeout = setTimeout(()=>{
-  },5000)
-  const abc = () => {
-    
-  }
+
   return (
     <div className="App">
         {state?.showLoader && <Loader/>}

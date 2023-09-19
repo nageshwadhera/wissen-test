@@ -1,16 +1,11 @@
-import {
-  SET_ENDPOINT,
-  SET_USERLIST,
-  SET_LOADER,
-  SET_TOKEN
-} from "./types";
+import { SET_ENDPOINT, SET_USERLIST, SET_LOADER, SET_TOKEN } from "./types";
 
 const initialState = {
   endpoint: "https://reqres.in/api/",
   loggedIn: false,
   showLoader: false,
   token: "",
-  userList: []
+  userList: [],
 };
 
 export const reducer = (state = initialState, action) => {
@@ -31,7 +26,6 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.data,
-        
       };
 
     case SET_LOADER:

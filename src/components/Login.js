@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "primereact/button";
 import HeaderImage from "../assets/wissenlogo.PNG";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,7 +21,11 @@ export default function Login() {
   const [errorMsg, setErrorMsg] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const TOKEN = useSelector((state) => state?.auth?.token);
   const ENDPOINT = useSelector((state) => state?.auth?.endpoint);
+  useEffect(() => {
+    if (TOKEN) navigate("/users");
+  }, []);
 
   const setFieldValue = (e) => {
     setErrorMsg("");
@@ -37,7 +41,7 @@ export default function Login() {
   const loginCall = async (e) => {
     e.preventDefault();
     const Errs = Object.entries(fieldsData).filter((field) => {
-      fieldValidation(field[0],field[1])
+      fieldValidation(field[0], field[1]);
       if (!field[1] || fieldErrors[field[1]]) return true;
     });
     if (!Errs.length) {

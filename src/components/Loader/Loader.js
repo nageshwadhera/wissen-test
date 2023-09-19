@@ -1,9 +1,10 @@
 import React from "react";
 import "./Loader.css";
+
 const Loader = () => {
   return (
-   <div className="mainLoad">
-    <span className="loader"></span>
+    <div className="mainLoad">
+      <span className="loader"></span>
     </div>
   );
 };

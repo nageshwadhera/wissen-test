@@ -1,13 +1,6 @@
-import {
-  SET_ENDPOINT,
-  SET_USERLIST,
-  SET_LOADER,
-  SET_TOKEN
-} from "./types";
-
+import { SET_ENDPOINT, SET_USERLIST, SET_LOADER, SET_TOKEN } from "./types";
 
 export function setUserList(data) {
- 
   return {
     type: SET_USERLIST,
     data,
@@ -27,10 +20,9 @@ export function setToken(data) {
   };
 }
 
-export function showLoader(data){
-  return{
+export function showLoader(data) {
+  return {
     type: SET_LOADER,
     data,
-  }
+  };
 }
-
