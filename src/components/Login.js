@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button } from "primereact/button";
-import { usersList } from "../services/auth.service";
 import HeaderImage from "../assets/wissenlogo.PNG";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
