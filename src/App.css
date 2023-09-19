@@ -52,10 +52,27 @@
 .d-blk {
   color: #000;
 }
+.clr-nt-vlt{
+  background-color: #d2d5ec !important;
+  color: #2739a7 !important
+}
+
 .clr-vlt {
   background-color: #2739a7 !important;
   color: #fff !important;
 }
 .text-left {
   text-align: left;
+}
+.f-icon-password{
+  position: absolute;
+  padding: 10px;
+  text-align: center;
+  color: gray;
+}
+.cl-vlt {
+  color: #2739a7 !important;
+}
+.b-0 {
+  border: none;
 }

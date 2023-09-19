@@ -1,23 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {Table,TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from "@mui/material";
 import { setToken } from "../redux/action";
 
 export default function Users() {
   const Token = useSelector((state) => state?.auth?.token);
   const userList = useSelector((state) => state?.auth?.userList);
   const [Header, setHeader] = useState([]);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-    let timer;
+  let timer;
     
   useEffect(() => {
     if (!Token) navigate("/login");
@@ -27,6 +20,7 @@ export default function Users() {
           logoutTimer();
         });
       });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
