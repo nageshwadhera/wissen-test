@@ -27,7 +27,7 @@ export default function Login() {
     setErrorMsg("");
     if (e?.target?.name == "check") {
       fieldValidation(e.target.name, e.target.checked);
-      setFieldsData({ ...fieldsData, [e.target.name]: e.target.chekced });
+      setFieldsData({ ...fieldsData, [e.target.name]: e?.target?.checked });
     } else {
       fieldValidation(e.target.name, e.target.value);
       setFieldsData({ ...fieldsData, [e.target.name]: e.target.value });
@@ -36,8 +36,9 @@ export default function Login() {
 
   const loginCall = async (e) => {
     e.preventDefault();
-    const Errs = Object.values(fieldsData).filter((value) => {
-      if (!value || fieldErrors[value]) return true;
+    const Errs = Object.entries(fieldsData).filter((field) => {
+      fieldValidation(field[0],field[1])
+      if (!field[1] || fieldErrors[field[1]]) return true;
     });
     if (!Errs.length) {
       try {
@@ -58,7 +59,7 @@ export default function Login() {
         }
       } catch (e) {
         if (e?.response?.data?.error) setErrorMsg(e.response.data.error);
-        else setErrorMsg(e.message);
+        else setErrorMsg(e?.message);
       } finally {
         dispatch(showLoader(false));
       }
@@ -79,7 +80,7 @@ export default function Login() {
         dispatch(setUserList(res.data.data));
       }
     } catch (e) {
-      console.log(e);
+      setErrorMsg(e?.message);
     } finally {
       dispatch(showLoader(false));
     }

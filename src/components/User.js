@@ -61,7 +61,7 @@ export default function Users() {
     
     const logout = () => {
       localStorage.clear();
-      navigate("login")
+      navigate("/login")
     };
           
   return (
@@ -69,8 +69,8 @@ export default function Users() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            {Header?.map((cellName)=>{
-                return(<TableCell align='right'>{cellName}</TableCell>)
+            {Header?.map((cellName,index)=>{
+                return(<TableCell align='right' key={index}>{cellName}</TableCell>)
             })}
           </TableRow>
         </TableHead>
